@@ -1,8 +1,12 @@
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
-let lightbox;
-
+const galleryItem = new SimpleLightbox('.gallery a', {
+  animationSpeed: 350,
+  captionsData: 'alt',
+  captionDelay: 150,
+  widthRatio: 0.9,
+});
 export function createGallery(images) {
   const markup = images
     .map(
@@ -32,21 +36,22 @@ export function createGallery(images) {
     )
     .join('');
 
-  gallery.innerHTML = markup;
-
-  if (!lightbox) {
-    lightbox = new SimpleLightbox(".gallery a", { 
-        captionsData: "alt", 
-        captionDelay: 150, 
-    animationSpeed: 350,
-    // rtl: true,
-    widthRatio: 0.9,
-});
-  } else {
-    lightbox.refresh();
-  }
+  document.querySelector('ul.gallery').insertAdjacentHTML('beforeend', markup);
+  galleryItem.refresh();
 }
 
 export function clearGallery() {
-  document.querySelector(".gallery").innerHTML = "";
-} 
+  document.querySelector('ul.gallery').innerHTML = '';
+}
+
+export function showLoader() {
+  document.querySelector('.loader').classList.add('js-loader');
+}
+
+export function hideLoader() {
+  document.querySelector('.loader').classList.remove('js-loader');
+}
+
+export function showLoadMoreButton() {
+  document.querySelector('.js-load-more').classList.add('load-more-btn');
+}
