@@ -51,7 +51,3 @@ export function showLoader() {
 export function hideLoader() {
   document.querySelector('.loader').classList.remove('js-loader');
 }
-
-export function showLoadMoreButton() {
-  document.querySelector('.js-load-more').classList.add('load-more-btn');
-}
